@@ -1,19 +1,19 @@
 import db from "./db.js";
 import app from "./app.js";
-import mysql from "mysql2";
 
 
-
-app.get("/", (req, res) => {
-    const sql = "SELECT * FROM todos";
+app.get("/api/todos", (req, res) => {
+    const sql = "SELECT id,content FROM todos order by id desc";
     db.query(sql, (err, result) => {
-        if (err) throw err;
+        if (err) {
+            return res.status(500).send({msg:"데이터 조회 실패했습니다.", error:false});
+        }
         console.log(result);
-        res.json(result);
+        return res.status(200).json(result);
     })
 });
 
-app.post("/api/todo", (req, res) => {
+app.post("/api/todos", (req, res) => {
     const {todos} = req.body;
     const content = todos;
     const completed = 0;
@@ -25,7 +25,12 @@ app.post("/api/todo", (req, res) => {
             return res.status(500).send({msg: "저장 실패"});
         }
         console.log("result",result);
-        return res.status(200).send({msg:"등록 성공"});
+        return res.status(201).send({msg:"등록 성공",data:{
+                id: result.insertId,
+                content
+            }
+
+        });
     })
 
 });

@@ -14,12 +14,11 @@ export default function InputTodo(){
         sendTodos(todo)
             .then(data =>{
                 console.log("data",data);
-                setTodo("")
+                setTodo("");
+                window.location.reload();
             })
             .catch(error => {
                 console.log(error);
-                alert(error.message);
-
             })
             .finally(() =>{
                 // window.location.reload();

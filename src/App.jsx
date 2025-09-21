@@ -1,4 +1,5 @@
 import InputTodo from "./components/Input.jsx";
+import TodoList from "./components/TodoList.jsx";
 
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
           box-border rounded-2xl p-10 size-2/6 max-w-screen-sm h-[95vh] bg-[#FFECC0] shadow-2xl">
               <h1 className="font-bold text-3xl">ToDo List✍️</h1>
               <InputTodo/>
+              <TodoList/>
           </div>
       </div>
   )
